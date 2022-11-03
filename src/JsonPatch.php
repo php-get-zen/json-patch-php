@@ -88,8 +88,8 @@ class JsonPatch
 
     foreach ($patches as $patch)
     {
-      $op = $patch['op'];
-      $path = $patch['path'];
+      $op = isset($patch['op']) ? $patch['op'] : null;
+      $path = isset($patch['path']) ? $patch['path'] : null;
 
       if (empty($op))
       {
