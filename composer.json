@@ -1,11 +1,18 @@
 {
-  "name": "mikemccabe/json-patch-php",
-  "description": "Produce and apply json-patch objects",
+  "name": "get-zen/json-patch-php",
+  "description": "Produce and apply json-patch objects. Forked from mikemccabe/json-patch-php (https://github.com/mikemccabe/json-patch-php).",
   "type": "library",
   "license": "LGPL-3.0",
+  "require": {
+      "php": ">=5.3",
+      "ext-json": "*"
+  },
   "autoload": {
       "psr-4": {
-          "mikemccabe\\JsonPatch\\": "src"
+          "GetZen\\": "src"
       }
+  },
+  "replace": {
+      "mikemccabe/json-patch-php": "*"
   }
 }

@@ -1,6 +1,8 @@
 json-patch-php
 ================
 
+Forked from [mikemccabe/json-patch-php](https://github.com/mikemccabe/json-patch-php).
+
 Produce and apply json-patch objects.
 
 Implements IETF JSON-patch (RFC 6902) and JSON-pointer (RFC 6901):
@@ -11,26 +13,15 @@ http://tools.ietf.org/html/rfc6901
 Using with Composer
 -------------------
 
-To use this library as a Composer dependency in your project, include the
-following sections in your project's `composer.json` file:
-
 ```
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mikemccabe/json-patch-php"
-        }
-    ],
-    "require": {
-        "mikemccabe/json-patch-php": "dev-master"
-    }
+composer require get-zen/json-patch-php
 ```
 
 Then, in your project's code, use the `JsonPatch` class definition from
-the `mikemccabe\JsonPatch` namespace like so:
+the `GetZen` namespace like so:
 
 ```php
-use mikemccabe\JsonPatch\JsonPatch;
+use GetZen\JsonPatch;
 ```
 
 Entry points
@@ -68,8 +59,10 @@ will succeed:
 Also, when $simplexml_mode is true, 1-length arrays are converted to
 scalars on return from patch().
 
-Tests
+Tests (!!!! Not maintained)
 -----
+
+
 
 Some tests are in a submodule
 (https://github.com/json-patch/json-patch-tests).  Do 'git submodule

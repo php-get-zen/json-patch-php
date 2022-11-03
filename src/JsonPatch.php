@@ -3,7 +3,6 @@
 /*
 .---------------------------------------------------------------------------.
 |  Software: JSON-Patch PHP library                                         |
-|   Version: 0.0.2                                                          |
 |      Site: https://github.com/mikemccabe/json-patch-php                   |
 | ------------------------------------------------------------------------- |
 |   License: LGPL-3.0
@@ -54,7 +53,7 @@ scalars on return from patch().
 
 */
 
-namespace mikemccabe\JsonPatch;
+namespace GetZen;
 
 class JsonPatchException extends \Exception { }
 
