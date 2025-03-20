@@ -102,14 +102,14 @@ class JsonPatch
                                      . json_encode($patch));
       }
       if (!in_array($op, array('add', 'remove', 'replace',
-                               'move', 'copy', 'test', 'append')))
+                               'move', 'copy', 'test', 'append', 'ensure')))
       {
         throw new JsonPatchException("Unrecognized op '$op' in "
                                      . json_encode($patch));
       }
 
       $parts = self::decompose_pointer($path);
-      if (in_array($op, Array('test', 'add', 'replace', 'append')))
+      if (in_array($op, Array('test', 'add', 'replace', 'append', 'ensure')))
       {
         if (!array_key_exists('value', $patch))
         {
@@ -140,6 +140,11 @@ class JsonPatch
                            $simplexml_mode);
       }
       else if ($op == 'replace')
+      {
+        $doc = self::do_op($doc, $op, $path, $parts, $value,
+                           $simplexml_mode);
+      }
+      else if ($op == 'ensure')
       {
         $doc = self::do_op($doc, $op, $path, $parts, $value,
                            $simplexml_mode);
@@ -472,7 +477,7 @@ class JsonPatch
     // Special-case toplevel
     if (count($parts) == 0)
     {
-      if ($op == 'add' || $op == 'replace')
+      if ($op == 'add' || $op == 'replace' || $op == 'ensure')
       {
         return $value;
       }
@@ -493,7 +498,11 @@ class JsonPatch
     {
       if (!array_key_exists($part, $doc))
       {
-        throw new JsonPatchException("Path '$path' not found");
+        if ($op == 'ensure') {
+          $doc[$part] = array();
+        } else {
+          throw new JsonPatchException("Path '$path' not found");
+        }
       }
       // recur, adding resulting sub-doc into doc returned to caller
 
@@ -575,6 +584,18 @@ class JsonPatch
         {
           throw new JsonPatchException("replace target '$path' not set");
         }
+        $doc[$part] = $value;
+      }
+    }
+
+    else if ($op == 'ensure')
+    {
+      if (!self::is_associative($doc) && self::is_index($part))
+      {
+        array_splice($doc, $part, 1, Array($value));
+      }
+      else
+      {
         $doc[$part] = $value;
       }
     }

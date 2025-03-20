@@ -10,6 +10,13 @@ Implements IETF JSON-patch (RFC 6902) and JSON-pointer (RFC 6901):
 http://tools.ietf.org/html/rfc6902
 http://tools.ietf.org/html/rfc6901
 
+Extensions
+----------
+
+Adds custom `ensure` operation (`op`) that replaces the value at target
+path or creates it if the path does not exist. (alpha!!!)
+
+
 Using with Composer
 -------------------
 
